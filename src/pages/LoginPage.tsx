@@ -1,41 +1,23 @@
-import React, { ReactPropTypes, useRef, useState } from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
-interface Props {
-  onAddUser: any;
+import { useForm } from "react-hook-form";
+interface FormData {
+  username: string;
+  password: string;
 }
-const LoginForm = (props: Props) => {
-  const [type, setType] = useState("password");
-  const usernameInputRef = useRef<any | undefined>();
-  const passwordInputRef = useRef<any | undefined>();
 
-  const [username, password] = useState({
-    username: "",
-    password: "",
-  });
-
-  //   useEffect(() => {
-  //     axios
-  //       .get("https://run.mocky.io/v3/80bc9bb2-59be-4af9-a744-eb9590e0093f")
-  //       .then((response) => {
-  //         setUsername(response.data.login.username);
-  //         setPassword(response.data.login.password);
-  //       });
-  //   }, []);
-  function submitHandler(event: React.FormEvent) {
-    event.preventDefault();
-
-    const enteredUsername = usernameInputRef.current?.value;
-    const enteredPassword = passwordInputRef.current?.value;
-
-    const compiledForm = {
-      username: enteredUsername,
-      password: enteredPassword,
-    };
-    props.onAddUser(compiledForm);
-  }
+export const LoginForm: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+  const onFormSubmit = (data: FormData) => {
+    console.log("data", data);
+  };
   return (
     <div
       className="container-card"
@@ -61,28 +43,37 @@ const LoginForm = (props: Props) => {
           height: "250px",
         }}
       >
-        <form onSubmit={submitHandler}>
+        <form onSubmit={handleSubmit(onFormSubmit)}>
           <CardContent className="">
             <TextField
               style={{
                 display: "flex",
                 margin: "20px",
               }}
+              {...register("username", { required: true })}
               placeholder="Username"
               variant="outlined"
               type="text"
               required
             />
+
             <TextField
               style={{
                 display: "flex",
                 margin: "20px",
               }}
+              type="password"
+              {...register("password", {
+                required: true,
+                minLength: 8,
+                maxLength: 16,
+              })}
               placeholder="Password"
               variant="outlined"
-              type={type}
-              required
             />
+            <div>{errors.password?.type === "minLength" && <span style={{display:"flex", alignSelf:"start", width:"100%", color: "red"}}>Your password must be almost 8 characters!</span>}</div>
+            <div>{errors.password?.type === "maxLength" && <span style={{color: "red"}}>Your password might be shorter than 16!</span>}</div>
+
             <Button
               variant="outlined"
               type="submit"

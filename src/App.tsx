@@ -6,8 +6,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<LoginForm onAddUser={()=>{console.log("hello");
-        }}/>}/>
+        <Route path="/" element={<LoginForm/>}/>
         </Routes>
     </div>
   );
