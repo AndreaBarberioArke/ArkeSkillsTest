@@ -9,7 +9,7 @@ export const MainNavigation = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/">Login Page</Link>
+            <Link to="/" style={{}}>Login Page</Link>
           </li>
           <li>
             <Link to="/Dashboard">Dashboard</Link>

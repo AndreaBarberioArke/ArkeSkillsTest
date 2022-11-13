@@ -1,23 +1,54 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
-import { useForm } from "react-hook-form";
-interface FormData {
+import { SubmitHandler, useForm } from "react-hook-form";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+interface FormValues {
   username: string;
   password: string;
 }
 
 export const LoginForm: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
-  const onFormSubmit = (data: FormData) => {
-    console.log("data", data);
-  };
+  const [{ username, password }] = useState({
+    username: "",
+    password: "",
+  });
+
+  
+  const [firstData, setFirstData] = useState<string | any>("");
+  const [secondData, setSecondData] = useState<string | any>("");
+  const navigate = useNavigate();
+  
+  const { register, handleSubmit } = useForm<FormValues>();
+  
+  
+  if (setFirstData === firstData && setSecondData === secondData) {
+    navigate("/dashboard");
+  } else {
+    console.log("Username or Password are incorrect");
+  }
+  
+  const onFormSubmit: any | SubmitHandler<FormValues> = (
+    data: FormValues,
+    event: React.FormEvent<HTMLFormElement>
+    ) => {
+      console.log("data", data);
+      event.preventDefault();
+    };
+    useEffect(() => {
+      axios
+        .get("https://run.mocky.io/v3/6ab5b40b-f976-4ec7-94cd-049db9b9b1db")
+        .then((res) => {
+          setFirstData(res.data?.username);
+          setSecondData(res.data?.password);
+          
+        });
+    }, []);
   return (
     <div
       className="container-card"
@@ -39,12 +70,18 @@ export const LoginForm: React.FC = () => {
           justifyContent: "space-between",
           margin: "150px",
           padding: "15px",
-          width: "350px",
-          height: "250px",
+          width: "400px",
+          height: "350px",
         }}
       >
         <form onSubmit={handleSubmit(onFormSubmit)}>
-          <CardContent className="">
+          <CardContent
+            style={{
+              display: "flex",
+              margin: "20px",
+              flexFlow: "column wrap",
+            }}
+          >
             <TextField
               style={{
                 display: "flex",
@@ -71,8 +108,6 @@ export const LoginForm: React.FC = () => {
               placeholder="Password"
               variant="outlined"
             />
-            <div>{errors.password?.type === "minLength" && <span style={{display:"flex", alignSelf:"start", width:"100%", color: "red"}}>Your password must be almost 8 characters!</span>}</div>
-            <div>{errors.password?.type === "maxLength" && <span style={{color: "red"}}>Your password might be shorter than 16!</span>}</div>
 
             <Button
               variant="outlined"
