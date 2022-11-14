@@ -15,40 +15,34 @@ interface FormValues {
 
 export const LoginForm: React.FC = () => {
   const [{ username, password }] = useState({
-    username: "",
-    password: "",
+    username: "Andrea",
+    password: "Ciao1234",
   });
 
-  
   const [firstData, setFirstData] = useState<string | any>("");
   const [secondData, setSecondData] = useState<string | any>("");
   const navigate = useNavigate();
-  
+
   const { register, handleSubmit } = useForm<FormValues>();
-  
-  
-  if (setFirstData === firstData && setSecondData === secondData) {
-    navigate("/dashboard");
-  } else {
-    console.log("Username or Password are incorrect");
-  }
-  
+
   const onFormSubmit: any | SubmitHandler<FormValues> = (
     data: FormValues,
     event: React.FormEvent<HTMLFormElement>
-    ) => {
-      console.log("data", data);
-      event.preventDefault();
-    };
-    useEffect(() => {
-      axios
-        .get("https://run.mocky.io/v3/6ab5b40b-f976-4ec7-94cd-049db9b9b1db")
-        .then((res) => {
-          setFirstData(res.data?.username);
-          setSecondData(res.data?.password);
-          
-        });
-    }, []);
+  ) => {
+    console.log("data", data);
+    event.preventDefault();
+    axios
+      .post("https://run.mocky.io/v3/d93248bb-0dbf-4221-a913-8996ebdaeaa5")
+      .then((res) => {
+        setFirstData(res.data?.username);
+        setSecondData(res.data?.password);
+      });
+    if (username === firstData && password === secondData) {
+      navigate("/dashboard");
+    } else {
+      console.log("Username or Password are incorrect");
+    }
+  };
   return (
     <div
       className="container-card"

@@ -9,10 +9,10 @@ export const MainNavigation = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/" style={{}}>Login Page</Link>
+            <Link to="/">Login Page</Link>
           </li>
           <li>
-            <Link to="/Dashboard">Dashboard</Link>
+            <Link to="/dashboard">Dashboard</Link>
           </li>
           <li>
           <Link to="/table">Table</Link>
