@@ -14,13 +14,11 @@ interface FormValues {
 }
 
 export const LoginForm: React.FC = () => {
-  const [{ username, password }] = useState({
-    username: "Andrea",
-    password: "Ciao1234",
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
   });
-
-  const [firstData, setFirstData] = useState<string | any>("");
-  const [secondData, setSecondData] = useState<string | any>("");
+  const { username, password } = user;
   const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm<FormValues>();
@@ -29,20 +27,18 @@ export const LoginForm: React.FC = () => {
     data: FormValues,
     event: React.FormEvent<HTMLFormElement>
   ) => {
-    console.log("data", data);
     event.preventDefault();
     axios
       .post("https://run.mocky.io/v3/d93248bb-0dbf-4221-a913-8996ebdaeaa5")
       .then((res) => {
-        setFirstData(res.data?.username);
-        setSecondData(res.data?.password);
+        if (res.data.username === username && res.data.password === password) {
+          navigate("/dashboard");
+        } else {
+          alert("Username or Password are incorrect");
+        }
       });
-    if (username === firstData && password === secondData) {
-      navigate("/dashboard");
-    } else {
-      console.log("Username or Password are incorrect");
-    }
   };
+
   return (
     <div
       className="container-card"
@@ -76,16 +72,29 @@ export const LoginForm: React.FC = () => {
               flexFlow: "column wrap",
             }}
           >
+            {/* 
+            chiamata da mocky.io, 
+            ciò che viene ritornato va messo in una variabile di stato 
+            visualizzarlo nella material table  
+            una volta visualizzati 
+            cambiare il valore di una riga
+            cambiando la variabile di stato con setTable
+            */}
             <TextField
               style={{
                 display: "flex",
                 margin: "20px",
               }}
               {...register("username", { required: true })}
+              onChange={(e) => {
+                setUser((p) => ({
+                  username: e.target.value,
+                  password: p.password,
+                }));
+              }}
               placeholder="Username"
               variant="outlined"
               type="text"
-              required
             />
 
             <TextField
@@ -99,6 +108,12 @@ export const LoginForm: React.FC = () => {
                 minLength: 8,
                 maxLength: 16,
               })}
+              onChange={(e) => {
+                setUser((p) => ({
+                  username: p.username,
+                  password: e.target.value,
+                }));
+              }}
               placeholder="Password"
               variant="outlined"
             />
