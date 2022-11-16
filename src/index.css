@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.userFormContainer{
+  background-color: #0002779a;
+  color: #fcb8d2;
+  width: 400px;
+  height: 500px;
+  margin: 25px;
+  border-radius: 10px;
+}
