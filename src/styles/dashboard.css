@@ -1,0 +1,12 @@
+.card-img {
+  display: block;
+  width: 100%;
+}
+.info-card h4,
+p {
+  color: #0002779a;
+}
+.card-container {
+  margin: 50px;
+  box-shadow: 7px 3px 3px #fcb8d2;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./MainNavigation.css";
+import "../../../src/styles/MainNavigation.css";
 
 export const MainNavigation = () => {
   return (
