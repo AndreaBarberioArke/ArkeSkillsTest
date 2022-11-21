@@ -40,51 +40,12 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <div
-      className="container-card"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flexFlow: "column",
-        justifyContent: "space-between",
-      }}
-    >
-      <Card
-        className="card-style"
-        variant="outlined"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          alignSelf: "center",
-          flexFlow: "column",
-          justifyContent: "space-between",
-          margin: "150px",
-          padding: "15px",
-          width: "400px",
-          height: "350px",
-        }}
-      >
+    <div className="container-card">
+      <Card className="card-style" variant="outlined">
         <form onSubmit={handleSubmit(onFormSubmit)}>
-          <CardContent
-            style={{
-              display: "flex",
-              margin: "20px",
-              flexFlow: "column wrap",
-            }}
-          >
-            {/* 
-            chiamata da mocky.io, 
-            ciò che viene ritornato va messo in una variabile di stato 
-            visualizzarlo nella material table  
-            una volta visualizzati 
-            cambiare il valore di una riga
-            cambiando la variabile di stato con setTable
-            */}
+          <CardContent>
             <TextField
-              style={{
-                display: "flex",
-                margin: "20px",
-              }}
+              className="text-field"
               {...register("username", { required: true })}
               onChange={(e) => {
                 setUser((p) => ({
@@ -98,10 +59,7 @@ export const LoginForm: React.FC = () => {
             />
 
             <TextField
-              style={{
-                display: "flex",
-                margin: "20px",
-              }}
+              className="text-field"
               type="password"
               {...register("password", {
                 required: true,
@@ -118,14 +76,7 @@ export const LoginForm: React.FC = () => {
               variant="outlined"
             />
 
-            <Button
-              variant="outlined"
-              type="submit"
-              style={{
-                display: "flex",
-                margin: "20px",
-              }}
-            >
+            <Button variant="outlined" type="submit" className="text-field">
               Submit
             </Button>
           </CardContent>
