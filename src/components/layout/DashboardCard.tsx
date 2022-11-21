@@ -1,8 +1,8 @@
 import React from "react";
 import { Card } from "@mui/material";
 import "../../../src/styles/dashboard.css";
-import styled from "@emotion/styled";
-import Paper from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 
 export const DashboardCard = ({ props }: any) => {
   const Element = styled(Paper)(({ theme }) => ({
@@ -12,7 +12,9 @@ export const DashboardCard = ({ props }: any) => {
     padding: theme.spacing(3),
     textAlign: "center",
 
-    [theme.breakpoints.down("sm")]: {},
+    [theme.breakpoints.down("sm")]: {
+      
+    },
   }));
   return (
     <Card variant="outlined" className="card-container">

@@ -10,3 +10,14 @@ p {
   margin: 50px;
   box-shadow: 7px 3px 3px #fcb8d2;
 }
+.box-container {
+  display: flex;
+  
+}
+.box {
+  width: 50%;
+}
+.grid {
+  background-color: aqua;
+  width: 100%;
+}
