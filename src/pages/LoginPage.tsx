@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { TextField } from "@mui/material";
@@ -7,6 +7,15 @@ import Button from "@mui/material/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
+
+import "./LoginPage.css";
+const Item = styled(Paper)(({ theme }) => ({
+  [theme.breakpoints.down("sm")]: {
+    width: "15.625rem",
+  },
+}));
 
 interface FormValues {
   username: string;
@@ -24,7 +33,6 @@ export const LoginForm: React.FC = () => {
   const { register, handleSubmit } = useForm<FormValues>();
 
   const onFormSubmit: any | SubmitHandler<FormValues> = (
-    data: FormValues,
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
@@ -40,10 +48,10 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="container-card">
-      <Card className="card-style" variant="outlined">
+    <Card className="container-card">
+      <Item className="card" variant="outlined">
         <form onSubmit={handleSubmit(onFormSubmit)}>
-          <CardContent>
+          <CardContent className="card-content">
             <TextField
               className="text-field"
               {...register("username", { required: true })}
@@ -81,8 +89,8 @@ export const LoginForm: React.FC = () => {
             </Button>
           </CardContent>
         </form>
-      </Card>
-    </div>
+      </Item>
+    </Card>
   );
 };
 
