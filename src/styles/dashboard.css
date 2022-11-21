@@ -18,6 +18,6 @@ p {
   width: 50%;
 }
 .grid {
-  background-color: aqua;
+justify-content: center;
   width: 100%;
 }

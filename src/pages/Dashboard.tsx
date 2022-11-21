@@ -15,7 +15,9 @@ export const Dashboard = () => {
     padding: theme.spacing(3),
     textAlign: "center",
 
-    [theme.breakpoints.down("sm")]: {},
+    [theme.breakpoints.down("sm")]: {
+      margin: "0px 5px 0px 0px",
+    },
   }));
 
   const [user, setUser] = useState([]);
@@ -29,14 +31,21 @@ export const Dashboard = () => {
   return (
     <div>
       <div className="box-container">
-        <Box className="box"
+        <Box
+          className="box"
           sx={{
-            paddingTop: "2rem",
-            paddingBottom: "2rem",
+            flexGrow: 2,
+            display: "grid",
           }}
         >
           <Element>
-            <Grid className="grid" container item xs={24} sx={{ justifyContent: "center" }}>
+            <Grid
+              className="grid"
+              container
+              item
+              xs={12}
+              
+            >
               {user &&
                 user.map((item, index) => (
                   <DashboardCard key={index} props={item} />
@@ -45,7 +54,6 @@ export const Dashboard = () => {
           </Element>
         </Box>
       </div>
-      <div className="container-Dashcard"></div>
     </div>
   );
 };
