@@ -16,4 +16,8 @@ root.render(
       <App />
     </React.StrictMode>
   </BrowserRouter>
+<<<<<<< HEAD
 );
+=======
+);
+>>>>>>> feat/table
