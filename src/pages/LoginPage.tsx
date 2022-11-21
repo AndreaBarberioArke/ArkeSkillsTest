@@ -34,7 +34,6 @@ export const LoginForm: React.FC = () => {
   const onFormSubmit: any | SubmitHandler<FormValues> = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
-    event.preventDefault();
     axios
       .post("https://run.mocky.io/v3/d93248bb-0dbf-4221-a913-8996ebdaeaa5")
       .then((res) => {
