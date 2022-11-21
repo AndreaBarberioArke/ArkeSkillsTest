@@ -6,11 +6,12 @@
 }
 .card {
   display: flex;
-  align-items: start;
+  align-items: center;
   align-self: center;
   flex-flow: column;
   justify-content: space-between;
-  width: 20%;
+  margin: 9.375rem;
+  padding: 0.938rem;
  
 }
 
