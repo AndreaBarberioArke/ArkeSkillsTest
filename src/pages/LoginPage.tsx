@@ -1,27 +1,30 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { TextField } from "@mui/material";
+import {Alert, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-
 import "../styles/LoginPage.css";
+
 const Item = styled(Paper)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     width: "15.625rem",
   },
 }));
+
+
 interface FormValues {
   username: string;
   password: string;
 }
 
 export const LoginForm: React.FC = () => {
+  const [error, setError] = useState<string>('');
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -40,49 +43,64 @@ export const LoginForm: React.FC = () => {
         if (res.data.username === username && res.data.password === password) {
           navigate("/dashboard");
         } else {
-          alert("Username or Password are incorrect");
+          setError('Username or Password are incorrect')
         }
       });
   };
 
+  function handleOnChange(type: string, e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
+    const value = e.target.value
+    if(type === 'username') {
+      setUser((p) => ({
+        username: value,
+        password: p.password,
+      }));
+    }
+    if(type === 'password') {
+      setUser((p) => ({
+        username:p.username,
+        password: value,
+      }));
+    }
+  }
+
   return (
-    <Card className="container-card">
+    <Card className="container">
       <Item className="card" variant="outlined">
         <form onSubmit={handleSubmit(onFormSubmit)}>
           <CardContent className="card-content">
             <TextField
               className="text-field"
               {...register("username", { required: true })}
-              onChange={(e) => {
-                setUser((p) => ({
-                  username: e.target.value,
-                  password: p.password,
-                }));
-              }}
+              onChange={(e) => handleOnChange('username', e)}
+              label="Username"
               placeholder="Username"
+              required
               variant="outlined"
               type="text"
+              sx={{mb: 2}}
             />
 
             <TextField
-              className="text-field"
               type="password"
               {...register("password", {
                 required: true,
                 minLength: 8,
                 maxLength: 16,
               })}
-              onChange={(e) => {
-                setUser((p) => ({
-                  username: p.username,
-                  password: e.target.value,
-                }));
-              }}
+              onChange={(e) => handleOnChange('password', e)}
+              required
               placeholder="Password"
+              label="Password"
               variant="outlined"
+              sx={{mb: 2}}
             />
+            {!!error && <Alert severity="error" sx={{mb:1}}>{error}</Alert>}
 
-            <Button variant="outlined" type="submit" className="text-field">
+            <Button
+                color="secondary"
+                type="submit"
+                className="text-field">
               Submit
             </Button>
           </CardContent>
