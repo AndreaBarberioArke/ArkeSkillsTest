@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler } from "react";
 import Card from "../ui/Card";
-import "./NewUserForm.css";
+import "../../styles/NewUserForm.css";
 import { useState } from "react";
 interface Props {
   onAddUsers: any;

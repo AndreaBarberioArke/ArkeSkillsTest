@@ -9,7 +9,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import "../../src/index.css";
-import "../components/layout/NewUserForm.css";
+import "../styles/NewUserForm.css";
 import NewUserForm from "../components/layout/NewUserForm";
 
 function TablePage() {
@@ -24,8 +24,8 @@ function TablePage() {
   }, []);
 
   return (
-    <div>
-      <div>
+    <>
+      <div className="table-container">
         <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead>
@@ -60,7 +60,7 @@ function TablePage() {
           }}
         />
       </div>
-    </div>
+    </>
   );
 }
 

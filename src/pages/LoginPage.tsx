@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 
-import "./LoginPage.css";
+import "../styles/LoginPage.css";
 const Item = styled(Paper)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     width: "15.625rem",
